@@ -10,19 +10,20 @@ fn compute_sizes() -> HashMap<Vec<&'static str>, usize> {
     INPUT.lines().for_each(|l| {
         let bytes = l.as_bytes();
         match bytes[0] {
-            b'$' => match bytes[2] {
-                b'c' => match &bytes[5] {
-                    b'.' => {
-                        cwd.pop().unwrap();
+            b'$' => {
+                if bytes[2] == b'c' {
+                    match &bytes[5] {
+                        b'.' => {
+                            cwd.pop().unwrap();
+                        }
+                        _ => {
+                            cwd.push(&l[5..]);
+                            // TODO: the hash map could maybe hold a &Vec instead of a Vec, which would allow us, to store references instead of cloning
+                            sizes.insert(cwd.clone(), 0); // TODO: get rid of the clone
+                        }
                     }
-                    _ => {
-                        cwd.push(&l[5..]);
-                        // TODO: the hash map could maybe hold a &Vec instead of a Vec, which would allow us, to store references instead of cloning
-                        sizes.insert(cwd.clone(), 0); // TODO: get rid of the clone
-                    }
-                },
-                _ => {}
-            },
+                }
+            }
             b'd' => {} // dir
             _ => {
                 let size = l.split(' ').next().unwrap().parse::<usize>().unwrap();
