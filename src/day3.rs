@@ -25,6 +25,7 @@ pub fn part1() -> isize {
 }
 
 fn get_index(b: u8) -> u8 {
+    #[allow(clippy::manual_range_contains)] // faster unfortunately
     if b >= b'a' && b <= b'z' {
         b - b'a'
     } else {
