@@ -41,10 +41,6 @@ pub fn part1() -> String {
             let elem = stacks[m.from - 1].pop_front().unwrap();
             stacks[m.to - 1].push_front(elem);
         }
-
-        stacks.iter().enumerate().for_each(|(i, s)| {
-            println!("{}: {:?}", i, s);
-        });
     });
 
     let mut res = String::with_capacity(stacks.len());

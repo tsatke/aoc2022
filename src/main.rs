@@ -8,6 +8,9 @@ mod day2;
 mod day3;
 mod day4;
 mod day5;
+mod day6;
+mod day7;
+mod day8;
 
 #[macro_export]
 macro_rules! run {
@@ -37,4 +40,10 @@ fn main() {
     run!(day4::part2);
     run!(day5::part1);
     run!(day5::part2);
+    run!(day6::part1);
+    run!(day6::part2);
+    run!(day7::part1);
+    run!(day7::part2);
+    run!(day8::part1);
+    run!(day8::part2);
 }
