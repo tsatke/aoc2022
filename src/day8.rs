@@ -65,7 +65,7 @@ impl Grid {
     }
 
     fn lines(&self) -> impl Iterator<Item = Line> {
-        self.0.iter().map(|l| Line(l))
+        self.0.iter().map(Line)
     }
 }
 
@@ -164,10 +164,7 @@ pub fn part2() -> usize {
         let col = scenic_score_row(&grid_transp, loc.transpose());
         row * col
     };
-    grid.coordinates()
-        .map(|coord| scenic_score(coord))
-        .max()
-        .unwrap()
+    grid.coordinates().map(scenic_score).max().unwrap()
 }
 
 #[cfg(test)]
