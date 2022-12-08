@@ -12,13 +12,14 @@ pub fn part1() -> isize {
             let mut prio: isize = 0;
             left.bytes()
                 .for_each(|b| seen[get_index(b) as usize] = true);
-            right.bytes().for_each(|b| {
+            for b in right.bytes() {
                 let p = get_index(b);
                 if seen[p as usize] {
                     prio += p as isize + 1; // p + 1 is the priority
                     seen[p as usize] = false;
+                    break;
                 }
-            });
+            }
             prio
         })
         .sum()
