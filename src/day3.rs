@@ -25,9 +25,10 @@ pub fn part1() -> isize {
 }
 
 fn get_index(b: u8) -> u8 {
-    #[allow(clippy::manual_range_contains)] // faster unfortunately
-    if b >= b'a' && b <= b'z' {
-        b - b'a'
+    // this is essentially `if (b'a'..=b'z').contains(&b)` but faster
+    let r = b.wrapping_sub(b'a');
+    if r <= 26 {
+        r
     } else {
         b - b'A' + 26
     }
