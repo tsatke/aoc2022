@@ -11,7 +11,7 @@ struct Move {
 
 impl Move {
     fn from_line(line: &str) -> Self {
-        let mut split = line.split(' ');
+        let mut split = line.split(|c| c == ' ');
         let count = split.nth(1).unwrap().parse::<usize>().unwrap();
         let from = split.nth(1).unwrap().parse::<usize>().unwrap();
         let to = split.nth(1).unwrap().parse::<usize>().unwrap();
