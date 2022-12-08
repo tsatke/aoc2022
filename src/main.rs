@@ -25,7 +25,7 @@ where
     O: Display,
 {
     let result = f();
-    println!("{} = {}", name, result);
+    println!("{name} = {result}");
 }
 
 fn main() {
