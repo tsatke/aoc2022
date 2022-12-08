@@ -1,4 +1,3 @@
-use std::mem::swap;
 use std::ops::Deref;
 
 const INPUT: &str = include_str!("../inputs/day8.txt");
@@ -14,8 +13,16 @@ impl Coordinate {
         Self(line, col)
     }
 
-    fn transpose(&mut self) {
-        swap(&mut self.0, &mut self.1);
+    fn transpose(&self) -> Coordinate {
+        Self(self.1, self.0)
+    }
+
+    fn line(&self) -> usize {
+        self.0 as usize
+    }
+
+    fn col(&self) -> usize {
+        self.1 as usize
     }
 }
 
@@ -39,6 +46,22 @@ impl Grid {
         }
 
         rotated
+    }
+
+    fn coordinates(&self) -> impl Iterator<Item = Coordinate> + '_ {
+        self.lines().enumerate().flat_map(|(line_num, line)| {
+            line.iter()
+                .enumerate()
+                .map(move |(col_num, _)| Coordinate::new(line_num as u8, col_num as u8))
+        })
+    }
+
+    fn height_at(&self, coord: Coordinate) -> u8 {
+        self.line(coord.line()).0[coord.col()]
+    }
+
+    fn line(&self, line: usize) -> Line {
+        Line(&self.0[line])
     }
 
     fn lines(&self) -> impl Iterator<Item = Line> {
@@ -105,20 +128,46 @@ pub fn part1() -> usize {
     const VISIBLE_FROM_EDGE: usize = (COLS + LINES) * 2 - 4;
     let grid = get_grid();
     let mut visible = get_visible(&grid)
-        .chain(get_visible(&grid.transpose()).map(|mut c| {
-            c.transpose();
-            c
-        }))
+        .chain(get_visible(&grid.transpose()).map(|c| c.transpose()))
         .collect::<Vec<Coordinate>>();
-    // all visible coordinates refer to `grid` (regarding transpositions)
     visible.sort_unstable();
     visible.dedup();
 
-    visible.iter().count() + VISIBLE_FROM_EDGE
+    visible.len() + VISIBLE_FROM_EDGE
+}
+
+fn scenic_score_row(g: &Grid, loc: Coordinate) -> usize {
+    let height = g.height_at(loc);
+    let line = g.line(loc.line());
+    let mut score_right: usize = 0;
+    for &c in line.iter().skip(loc.col() + 1) {
+        score_right += 1;
+        if c >= height {
+            break;
+        }
+    }
+    let mut score_left: usize = 0;
+    for &c in line.iter().rev().skip(COLS - loc.col()) {
+        score_left += 1;
+        if c >= height {
+            break;
+        }
+    }
+    score_right * score_left
 }
 
 pub fn part2() -> usize {
-    0
+    let grid = get_grid();
+    let grid_transp = grid.transpose();
+    let scenic_score = |loc: Coordinate| -> usize {
+        let row = scenic_score_row(&grid, loc);
+        let col = scenic_score_row(&grid_transp, loc.transpose());
+        row * col
+    };
+    grid.coordinates()
+        .map(|coord| scenic_score(coord))
+        .max()
+        .unwrap()
 }
 
 #[cfg(test)]
@@ -141,7 +190,7 @@ mod tests {
 
     #[test]
     fn test_part2() {
-        assert_eq!(part2(), 0);
+        assert_eq!(part2(), 335580);
     }
 
     #[bench]
