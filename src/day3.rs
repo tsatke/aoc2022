@@ -82,7 +82,7 @@ pub fn part2_simd() -> isize {
 
         let res = seen[0].bitand(seen[1]).bitand(seen[2]);
 
-        for (pos, &v) in res.as_array().iter().enumerate() {
+        for (pos, &v) in res.as_array().iter().take(52).enumerate() {
             if v == 0 {
                 continue;
             }
