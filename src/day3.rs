@@ -35,11 +35,8 @@ fn get_index(b: u8) -> u8 {
 pub fn part2() -> isize {
     let mut lines = INPUT.lines();
     let mut total: isize = 0;
-    loop {
-        let window = match (lines.next(), lines.next(), lines.next()) {
-            (Some(line1), Some(line2), Some(line3)) => [line1, line2, line3],
-            _ => break,
-        };
+    while let (Some(line1), Some(line2), Some(line3)) = (lines.next(), lines.next(), lines.next()) {
+        let window = [line1, line2, line3];
 
         let mut seen = [[false; 52]; 4];
         for i in 0..window.len() {
@@ -66,11 +63,8 @@ pub fn part2() -> isize {
 pub fn part2_simd() -> isize {
     let mut lines = INPUT.lines();
     let mut total: isize = 0;
-    loop {
-        let window = match (lines.next(), lines.next(), lines.next()) {
-            (Some(line1), Some(line2), Some(line3)) => [line1, line2, line3],
-            _ => break,
-        };
+    while let (Some(line1), Some(line2), Some(line3)) = (lines.next(), lines.next(), lines.next()) {
+        let window = [line1, line2, line3];
 
         let mut seen = [
             u8x64::from_array([0_u8; 64]),
