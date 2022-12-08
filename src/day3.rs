@@ -11,9 +11,8 @@ pub fn part1() -> isize {
             let mut seen = [false; 52];
             let mut prio: isize = 0;
             left.bytes()
-                .into_iter()
                 .for_each(|b| seen[get_index(b) as usize] = true);
-            right.bytes().into_iter().for_each(|b| {
+            right.bytes().for_each(|b| {
                 let p = get_index(b);
                 if seen[p as usize] {
                     prio += p as isize + 1; // p + 1 is the priority
