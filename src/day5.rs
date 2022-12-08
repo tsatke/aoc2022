@@ -20,12 +20,12 @@ impl Move {
 }
 
 pub fn part1() -> String {
-    let mut stacks: Vec<VecDeque<char>> = vec![VecDeque::new(); 9];
+    let mut stacks: Vec<VecDeque<u8>> = vec![VecDeque::new(); 9];
     INPUT.lines().take(8).for_each(|l| {
         let mut elements = [None; 9];
         for (i, p) in (1..l.len()).step_by(4).enumerate() {
-            let c = l.chars().nth(p).unwrap();
-            elements[i] = if c == ' ' { None } else { Some(c) };
+            let c = l.as_bytes()[p];
+            elements[i] = if c == b' ' { None } else { Some(c) };
         }
         for (i, e) in elements
             .into_iter()
@@ -44,17 +44,19 @@ pub fn part1() -> String {
     });
 
     let mut res = String::with_capacity(stacks.len());
-    stacks.iter().for_each(|s| res.push(*s.front().unwrap()));
+    stacks
+        .iter()
+        .for_each(|s| res.push(*s.front().unwrap() as char));
     res
 }
 
 pub fn part2() -> String {
-    let mut stacks: Vec<VecDeque<char>> = vec![VecDeque::new(); 9];
+    let mut stacks: Vec<VecDeque<u8>> = vec![VecDeque::new(); 9];
     INPUT.lines().take(8).for_each(|l| {
         let mut elements = [None; 9];
         for (i, p) in (1..l.len()).step_by(4).enumerate() {
-            let c = l.chars().nth(p).unwrap();
-            elements[i] = if c == ' ' { None } else { Some(c) };
+            let c = l.as_bytes()[p];
+            elements[i] = if c == b' ' { None } else { Some(c) };
         }
         for (i, e) in elements
             .into_iter()
@@ -66,7 +68,7 @@ pub fn part2() -> String {
     });
 
     INPUT.lines().skip(10).map(Move::from_line).for_each(|m| {
-        let mut elems: VecDeque<char> = VecDeque::with_capacity(m.count);
+        let mut elems: VecDeque<u8> = VecDeque::with_capacity(m.count);
         for _ in 0..m.count {
             let elem = stacks[m.from - 1].pop_front().unwrap();
             elems.push_front(elem);
@@ -77,7 +79,9 @@ pub fn part2() -> String {
     });
 
     let mut res = String::with_capacity(stacks.len());
-    stacks.iter().for_each(|s| res.push(*s.front().unwrap()));
+    stacks
+        .iter()
+        .for_each(|s| res.push(*s.front().unwrap() as char));
     res
 }
 
