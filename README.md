@@ -22,6 +22,8 @@ test day7::tests::bench_part1      ... bench:     120,039 ns/iter (+/- 5,084)
 test day7::tests::bench_part2      ... bench:     120,765 ns/iter (+/- 3,306)
 test day8::tests::bench_part1      ... bench:      64,805 ns/iter (+/- 1,115)
 test day8::tests::bench_part2      ... bench:     179,102 ns/iter (+/- 3,265)
+test day9::tests::bench_part1      ... bench:      54,553 ns/iter (+/- 1,624)
+test day9::tests::bench_part2      ... bench:     303,371 ns/iter (+/- 4,333)
 ```
 
 Benchmarks are included and done via `cargo bench`.
