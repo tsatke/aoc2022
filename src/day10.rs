@@ -38,8 +38,7 @@ pub fn part1() -> isize {
     let mut total_signal_strength: isize = 0;
     let commands = INPUT.lines().map(Command::from_str);
     for c in commands {
-        let cycle_count = c.cycle_count();
-        cycle += cycle_count;
+        cycle += c.cycle_count();
         if let Some(&&target_cycle) = target_cycles.peek() {
             if cycle >= target_cycle {
                 let _ = target_cycles.next();
