@@ -88,8 +88,8 @@ pub fn part2() -> CRTScreen {
     INPUT.lines().map(Command::from_str).for_each(|c| {
         let cycle_count = c.cycle_count();
         for _ in 0..cycle_count {
-            let line = &mut screen.lines[cycle / 40];
-            let line_x = cycle % 40;
+            let (line_index, line_x) = (cycle / LINE_WIDTH, cycle % LINE_WIDTH);
+            let line = &mut screen.lines[line_index];
             if (sprite_center - 1..=sprite_center + 1).contains(&(line_x as isize)) {
                 line[line_x] = b'#';
             } else {
