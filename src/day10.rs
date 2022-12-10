@@ -37,7 +37,7 @@ pub fn part1() -> isize {
     let mut target_cycles = [20_usize, 60, 100, 140, 180, 220].iter().peekable();
     let mut total_signal_strength: isize = 0;
     let commands = INPUT.lines().map(Command::from_str);
-    for c in commands.into_iter() {
+    for c in commands {
         let cycle_count = c.cycle_count();
         cycle += cycle_count;
         if let Some(&&target_cycle) = target_cycles.peek() {
