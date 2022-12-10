@@ -36,14 +36,21 @@ pub fn part1() -> isize {
     let mut cycle: usize = 0;
     let mut target_cycles = [20_usize, 60, 100, 140, 180, 220].iter().peekable();
     let mut total_signal_strength: isize = 0;
-    INPUT.lines().map(Command::from_str).for_each(|c| {
+    let commands = INPUT.lines().map(Command::from_str);
+    for c in commands.into_iter() {
         let cycle_count = c.cycle_count();
         cycle += cycle_count;
-        if let Some(&target_cycle) = target_cycles.next_if(|&&t| cycle >= t) {
-            total_signal_strength += x * (target_cycle as isize);
+        if let Some(&&target_cycle) = target_cycles.peek() {
+            if cycle >= target_cycle {
+                let _ = target_cycles.next();
+                total_signal_strength += x * (target_cycle as isize);
+            }
+        } else {
+            // no more target cycles, no need to finish the loop
+            break;
         }
         c.apply(&mut x)
-    });
+    }
     total_signal_strength
 }
 
