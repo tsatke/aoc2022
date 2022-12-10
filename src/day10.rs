@@ -68,7 +68,7 @@ impl Display for CRTScreen {
             l.iter().for_each(|c| {
                 f.write_char(*c as char).unwrap();
             });
-            writeln!(f, "").unwrap();
+            writeln!(f).unwrap();
         });
         Ok(())
     }
