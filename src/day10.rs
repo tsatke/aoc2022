@@ -54,15 +54,16 @@ pub fn part1() -> isize {
 }
 
 const LINE_WIDTH: usize = 40;
+const LINES: usize = 6;
 
 pub struct CRTScreen {
-    lines: [[u8; LINE_WIDTH]; 6],
+    lines: [[u8; LINE_WIDTH]; LINES],
 }
 
 impl CRTScreen {
     const fn new() -> Self {
-        CRTScreen {
-            lines: [[b'X'; LINE_WIDTH]; 6],
+        Self {
+            lines: [[b'X'; LINE_WIDTH]; LINES],
         }
     }
 }
