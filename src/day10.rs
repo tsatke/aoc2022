@@ -63,7 +63,7 @@ pub struct CRTScreen {
 impl CRTScreen {
     const fn new() -> Self {
         Self {
-            lines: [[b'X'; LINE_WIDTH]; LINES],
+            lines: [[b'.'; LINE_WIDTH]; LINES],
         }
     }
 }
@@ -99,8 +99,6 @@ pub fn part2() -> CRTScreen {
             let line = &mut screen.lines[line_index];
             if (sprite_center - 1..=sprite_center + 1).contains(&(line_x as isize)) {
                 line[line_x] = b'#';
-            } else {
-                line[line_x] = b'.';
             }
             cycle += 1;
         }
