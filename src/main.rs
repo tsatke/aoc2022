@@ -4,6 +4,7 @@
 use std::fmt::Display;
 
 mod day1;
+mod day10;
 mod day2;
 mod day3;
 mod day4;
@@ -49,4 +50,6 @@ fn main() {
     run!(day8::part2);
     run!(day9::part1);
     run!(day9::part2);
+    run!(day10::part1);
+    run!(day10::part2);
 }

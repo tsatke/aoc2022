@@ -5,6 +5,8 @@ The goal is, to get fast execution times.
 
 ## Performance
 ```plain
+test day10::tests::bench_part1     ... bench:       1,670 ns/iter (+/- 47)
+test day10::tests::bench_part2     ... bench:       1,748 ns/iter (+/- 69)
 test day1::tests::bench_part1      ... bench:      25,180 ns/iter (+/- 303)
 test day1::tests::bench_part2      ... bench:      25,235 ns/iter (+/- 512)
 test day2::tests::bench_part1      ... bench:      27,804 ns/iter (+/- 342)
