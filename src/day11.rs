@@ -82,7 +82,7 @@ where
 {
     let mut monkey_business = [0_usize; 8];
 
-    for _round in 0..rounds {
+    for _ in 0..rounds {
         for monkey_num in 0..monkeys.len() {
             for _ in 0..monkeys[monkey_num].starting_items.len() {
                 let monkey = &mut monkeys[monkey_num];
@@ -123,6 +123,11 @@ mod tests {
     extern crate test;
 
     use test::Bencher;
+
+    #[bench]
+    fn bench_parse_monkeys(b: &mut test::Bencher) {
+        b.iter(|| parse_monkeys());
+    }
 
     #[test]
     fn test_part1() {
