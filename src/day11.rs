@@ -27,7 +27,7 @@ impl Monkey {
             .array_chunks::<2>()
             .step_by(2)
             .map(|b| unsafe {
-                // SAFETY: the bytes came from a &str, so they are valid UTF-8
+                // SAFETY: the bytes came from a ASCII &str, so they are valid UTF-8
                 std::str::from_utf8_unchecked(b)
             })
             .map(|n| n.parse::<usize>().unwrap())
