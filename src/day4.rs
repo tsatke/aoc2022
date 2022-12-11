@@ -1,36 +1,37 @@
-use std::ops::RangeInclusive;
-
 const INPUT: &str = include_str!("../inputs/day4.txt");
 
-fn ranges() -> impl Iterator<Item = (RangeInclusive<isize>, RangeInclusive<isize>)> {
+fn ranges() -> impl Iterator<Item = ((usize, usize), (usize, usize))> {
     INPUT.lines().map(|l| {
         let mut split = l.split(|c| c == ',' || c == '-');
-        let left_start = split.next().unwrap().parse::<isize>().unwrap();
-        let left_end = split.next().unwrap().parse::<isize>().unwrap();
-        let right_start = split.next().unwrap().parse::<isize>().unwrap();
-        let right_end = split.next().unwrap().parse::<isize>().unwrap();
-        (left_start..=left_end, right_start..=right_end)
+        let left_start = split.next().unwrap().parse::<usize>().unwrap();
+        let left_end = split.next().unwrap().parse::<usize>().unwrap();
+        let right_start = split.next().unwrap().parse::<usize>().unwrap();
+        let right_end = split.next().unwrap().parse::<usize>().unwrap();
+        ((left_start, left_end), (right_start, right_end))
     })
 }
 
-pub fn part1() -> isize {
+pub fn part1() -> usize {
     ranges()
         .filter(|(left, right)| {
-            (left.contains(right.start()) && left.contains(right.end()))
-                || (right.contains(left.start()) && right.contains(left.end()))
+            (left.0 <= right.0 && left.1 >= right.0 && left.0 <= right.1 && left.1 >= right.1)
+                || (right.0 <= left.0
+                    && right.1 >= left.0
+                    && right.0 <= left.1
+                    && right.1 >= left.1)
         })
-        .count() as isize
+        .count()
 }
 
-pub fn part2() -> isize {
+pub fn part2() -> usize {
     ranges()
         .filter(|(left, right)| {
-            left.contains(right.start())
-                || left.contains(right.end())
-                || right.contains(left.start())
-                || right.contains(left.end())
+            left.0 <= right.0 && left.1 >= right.0
+                || left.0 <= right.1 && left.1 >= right.1
+                || right.0 <= left.0 && right.1 >= left.0
+                || right.0 <= left.1 && right.1 >= left.1
         })
-        .count() as isize
+        .count()
 }
 
 #[cfg(test)]
