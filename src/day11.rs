@@ -80,7 +80,7 @@ fn solve<F>(mut monkeys: Vec<Monkey>, rounds: usize, worry_level_modifier: F) ->
 where
     F: Fn(usize) -> usize,
 {
-    let mut monkey_business = vec![0_usize; monkeys.len()]; // TODO: make this an array
+    let mut monkey_business = [0_usize; 8];
 
     for _round in 0..rounds {
         for monkey_num in 0..monkeys.len() {

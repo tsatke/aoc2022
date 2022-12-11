@@ -7,8 +7,8 @@ The goal is, to get fast execution times.
 ```plain
 test day10::tests::bench_part1     ... bench:       1,201 ns/iter (+/- 37)
 test day10::tests::bench_part2     ... bench:       1,748 ns/iter (+/- 69)
-test day11::tests::bench_part1     ... bench:      10,513 ns/iter (+/- 326)
-test day11::tests::bench_part2     ... bench:   3,354,308 ns/iter (+/- 37,452)
+test day11::tests::bench_part1     ... bench:      10,241 ns/iter (+/- 209)
+test day11::tests::bench_part2     ... bench:   3,321,320 ns/iter (+/- 39,025)
 test day1::tests::bench_part1      ... bench:      25,180 ns/iter (+/- 303)
 test day1::tests::bench_part2      ... bench:      25,235 ns/iter (+/- 512)
 test day2::tests::bench_part1      ... bench:      27,804 ns/iter (+/- 342)
