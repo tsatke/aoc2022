@@ -139,7 +139,6 @@ fn drop_sand(map: &mut Grid, floor: usize) -> Location {
     }
 }
 
-// TODO: can we get more efficient with bitvectors (bitvec crate?) instead of bool arrays?
 struct Grid([[bool; COLS]; ROWS]);
 
 impl Index<Coord> for Grid {
